@@ -92,6 +92,9 @@ const config = {
         success: 'hsl(var(--success))',
         error: 'hsl(var(--error))',
         warning: 'hsl(var(--warning))',
+        pvgrey: 'hsl(var(--postivus-grey))',
+        pvgreen: 'hsl(var(--postivus-green))',
+        pvdark: 'hsl(var(--postivus-dark))',
       },
       fontFamily: {
         mono: ['var(--font-geist-mono)'],

@@ -34,6 +34,30 @@ const columnFields: Field[] = [
     ],
   },
   {
+    name: 'colorVariant',
+    type: 'select',
+    defaultValue: 'grey',
+    options: [
+      {
+        label: 'default',
+        value: 'grey',
+      },
+      {
+        label: 'green',
+        value: 'green',
+      },
+      {
+        label: 'dark',
+        value: 'dark',
+      },
+    ],
+  },
+  {
+    type: 'upload',
+    name: 'illustration',
+    relationTo: 'media',
+  },
+  {
     name: 'richText',
     type: 'richText',
     editor: lexicalEditor({
@@ -53,6 +77,7 @@ const columnFields: Field[] = [
     type: 'checkbox',
   },
   link({
+    appearances: false,
     overrides: {
       admin: {
         condition: (_, { enableLink }) => Boolean(enableLink),

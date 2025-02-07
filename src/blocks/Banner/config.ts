@@ -5,10 +5,20 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
+import { link } from '@/fields/link'
 
 export const Banner: Block = {
   slug: 'banner',
   fields: [
+    {
+      name: 'type',
+      type: 'select',
+      defaultValue: 'minimal',
+      options: [
+        { label: 'Minimal', value: 'minimal' },
+        { label: 'Standard', value: 'standard' },
+      ],
+    },
     {
       name: 'style',
       type: 'select',
@@ -22,6 +32,10 @@ export const Banner: Block = {
       required: true,
     },
     {
+      name: 'title',
+      type: 'text',
+    },
+    {
       name: 'content',
       type: 'richText',
       editor: lexicalEditor({
@@ -31,6 +45,21 @@ export const Banner: Block = {
       }),
       label: false,
       required: true,
+    },
+    link({
+      overrides: {
+        admin: {
+          condition: (_, { type } = {}) => ['standard'].includes(type),
+        },
+      },
+    }),
+    {
+      type: 'upload',
+      name: 'media',
+      relationTo: 'media',
+      admin: {
+        condition: (_, { type } = {}) => ['standard'].includes(type),
+      },
     },
   ],
   interfaceName: 'BannerBlock',

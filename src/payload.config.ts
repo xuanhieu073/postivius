@@ -68,19 +68,21 @@ export default buildConfig({
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
-  plugins: [
-    ...plugins,
-    // storage-adapter-placeholder
-    vercelBlobStorage({
-      enabled: true, // Optional, defaults to true
-      // Specify which collections should use Vercel Blob
-      collections: {
-        media: true,
-      },
-      // Token provided by Vercel once Blob storage is added to your Vercel project
-      token: process.env.BLOB_READ_WRITE_TOKEN,
-    }),
-  ],
+  plugins: process.env.BLOB_READ_WRITE_TOKEN
+    ? [
+        ...plugins,
+        // storage-adapter-placeholder
+        vercelBlobStorage({
+          enabled: true, // Optional, defaults to true
+          // Specify which collections should use Vercel Blob
+          collections: {
+            media: true,
+          },
+          // Token provided by Vercel once Blob storage is added to your Vercel project
+          token: process.env.BLOB_READ_WRITE_TOKEN,
+        }),
+      ]
+    : plugins,
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {
